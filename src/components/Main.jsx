@@ -1,6 +1,41 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import titles from './assets/benefitsTitle.json';
+import titles768 from './assets/benefitsTitle768.json';
+import content from './assets/benefitsContent.json';
+import content768 from './assets/benefitsContent768.json';
+import BenefitsTitle from './BenefitsTitle';
+import BenefitsContent from './BenefitsContent';
 
 const Main = () => {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [matches, setMatches] = React.useState(window.matchMedia('(min-width: 768px)').matches);
+
+  const benefitsImages = [
+    'images/benefits/1-1.jpg',
+    'images/benefits/2-2.jpg',
+    'images/benefits/3-3.jpg',
+    'images/benefits/4-4.jpg',
+  ];
+  const benefitsImages768 = [
+    'images/benefits/1-1-active1.jpg',
+    'images/benefits/2-2-active1.jpg',
+    'images/benefits/3-3-active1.jpg',
+    'images/benefits/4-4-active1.jpg',
+  ];
+
+  const onClickFilter = (index) => {
+    setActiveIndex(index);
+  };
+
+  React.useEffect(() => {
+    window
+      .matchMedia('(min-width: 768px)')
+      .addEventListener('change', (e) => setMatches(e.matches));
+  }, []);
+  console.log(activeIndex);
+
   return (
     <main>
       <section className="bg">
@@ -18,64 +53,39 @@ const Main = () => {
         <div className="container">
           <h2 className="services__title">Услуги</h2>
           <div className="services__items">
-            <a
-              className="services-item__link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="./computer-repair.html">
+            <Link className="services-item__link" to="/computer-repair">
               <div className="services-item services-item__one">
                 <p className="services-item__text">Ремонт компьютера</p>
               </div>
-            </a>
-            <a
-              className="services-item__link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="./laptop-repair.html">
+            </Link>
+            <Link className="services-item__link" to="/laptop-repair">
               <div className="services-item services-item__two">
                 <p className="services-item__text">Ремонт ноутбука</p>
               </div>
-            </a>
-            <a
-              className="services-item__link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="./installation-programs.html">
+            </Link>
+            <Link className="services-item__link" to="/installation-programs">
               <div className="services-item services-item__three">
                 <p className="services-item__text">Установка программ</p>
               </div>
-            </a>
-            <a
-              className="services-item__link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="./system-installation.html">
+            </Link>
+            <Link className="services-item__link" to="/system-installation">
               <div className="services-item services-item__four">
                 <p className="services-item__text">Установка системы</p>
               </div>
-            </a>
-            <a
-              className="services-item__link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="./internet-setup.html">
+            </Link>
+            <Link className="services-item__link" to="/internet-setup">
               <div className="services-item services-item__five">
                 <p className="services-item__text">Настройка интернета</p>
               </div>
-            </a>
-            <a
-              className="services-item__link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="./virus-removal.html">
+            </Link>
+            <Link className="services-item__link" to="/virus-removal">
               <div className="services-item services-item__six">
                 <p className="services-item__text">Удаление вирусов</p>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
-
       <section className="discount" style={{ backgroundImage: "url('../images/discount-bg.jpg')" }}>
         <div className="container">
           <h5 className="discount__title">Скидка 20%</h5>
@@ -88,131 +98,55 @@ const Main = () => {
           </form>
           <p className="discount__text">
             Нажимая на кнопку «Отправить», вы даёте согласие на{' '}
-            <a href="#">обработку персональных данных</a>
+            <Link className="personal-data" to="/politics">
+              обработку персональных данных
+            </Link>
           </p>
         </div>
       </section>
-
       <section className="benefits">
         <div className="container">
           <h2 className="benefits__title">Преимущества</h2>
           <div className="benefits-tabs__top">
-            <a
-              className="benefits-tabs__top-item benefits-tabs__top-item--active benefits-tabs__top-item--one benefits-tabs__top-item--one--active benefits-tabs__top-item--one1 benefits-tabs__top-item--one1--active"
-              href="#tab-1">
-              <div className="benefits-tabs__top-box--one benefits-tabs__top-box--one1 benefits-tabs__top-box--one1--active benefits-tabs__top-box--one--active"></div>
-              <p className="benefits-tabs__top-text">Гарантия</p>
-            </a>
-            <a
-              className="benefits-tabs__top-item benefits-tabs__top-item--two benefits-tabs__top-item--two1"
-              href="#tab-2">
-              <div className="benefits-tabs__top-box--two benefits-tabs__top-box--two1"></div>
-              <p className="benefits-tabs__top-text">Время</p>
-            </a>
-            <a
-              className="benefits-tabs__top-item benefits-tabs__top-item--three benefits-tabs__top-item--three1"
-              href="#tab-3">
-              <div className="benefits-tabs__top-box--three benefits-tabs__top-box--three1"></div>
-              <p className="benefits-tabs__top-text">Стаж</p>
-            </a>
-            <a
-              className="benefits-tabs__top-item benefits-tabs__top-item--four benefits-tabs__top-item--four1"
-              href="#tab-4">
-              <div className="benefits-tabs__top-box--four benefits-tabs__top-box--four1"></div>
-              <p className="benefits-tabs__top-text">Диагностика</p>
-            </a>
+            {matches
+              ? titles.map((obj, i) => (
+                  <div
+                    key={obj.id}
+                    onClick={() => onClickFilter(i)}
+                    className={activeIndex === i ? 'benefits-tabs__top-item--active' : ''}>
+                    <BenefitsTitle
+                      titles={obj}
+                      index={activeIndex}
+                      id={i}
+                      img={benefitsImages[i]}
+                    />
+                  </div>
+                ))
+              : titles768.map((obj, i) => (
+                  <div
+                    key={obj.id}
+                    onClick={() => onClickFilter(i)}
+                    className={activeIndex === i ? 'benefits-tabs__top-item--active' : ''}>
+                    <BenefitsTitle
+                      titles={obj}
+                      index={activeIndex}
+                      id={i}
+                      img={benefitsImages768[i]}
+                    />
+                  </div>
+                ))}
           </div>
           <div className="benefits-tabs__content">
-            <div
-              className="benefits-tabs__content-item benefits-tabs__content-item--active"
-              id="tab-1">
-              <div className="benefits-tabs__content-info">
-                <img
-                  className="benefits-tabs__content-img"
-                  src="images/benefits/1-1-1.jpg"
-                  alt="benefits"
-                />
-                <img
-                  className="benefits-tabs__content-img benefits-tabs__content-img--active1"
-                  src="images/benefits/1-1-1-active1.jpg"
-                  alt="benefits"
-                />
-                <div className="benefits-tabs__content-box">
-                  <h6 className="benefits-tabs__content-title">Гарантия</h6>
-                  <p className="benefits-tabs__content-text">
-                    Наш сервисный центр предоставляет гарантию до 3 лет, потому что мы используем
-                    только качественные комплектующие для ваших компьютеров и ноутбуков.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="benefits-tabs__content-item" id="tab-2">
-              <div className="benefits-tabs__content-info">
-                <img
-                  className="benefits-tabs__content-img"
-                  src="images/benefits/2-2-2.jpg"
-                  alt="benefits"
-                />
-                <img
-                  className="benefits-tabs__content-img benefits-tabs__content-img--active1"
-                  src="images/benefits/2-2-2-active1.jpg"
-                  alt="benefits"
-                />
-                <div className="benefits-tabs__content-box">
-                  <h6 className="benefits-tabs__content-title">Время</h6>
-                  <p className="benefits-tabs__content-text">
-                    Прибудем к вам в течении часа, и в короткие сроки произведём качественный
-                    ремонт, ведь мы ценим и уважаем ваше время.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="benefits-tabs__content-item" id="tab-3">
-              <div className="benefits-tabs__content-info">
-                <img
-                  className="benefits-tabs__content-img"
-                  src="images/benefits/3-3-3.jpg"
-                  alt="benefits"
-                />
-                <img
-                  className="benefits-tabs__content-img benefits-tabs__content-img--active1"
-                  src="images/benefits/3-3-3-active1.jpg"
-                  alt="benefits"
-                />
-                <div className="benefits-tabs__content-box">
-                  <h6 className="benefits-tabs__content-title">Стаж</h6>
-                  <p className="benefits-tabs__content-text">
-                    Мы тщательно отбираем людей в команду. Все наши сотрудники профессионалы своего
-                    дела и имеют опыт в ремонте компьютеров минимум от 2 - ух лет.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="benefits-tabs__content-item" id="tab-4">
-              <div className="benefits-tabs__content-info">
-                <img
-                  className="benefits-tabs__content-img"
-                  src="images/benefits/4-4-4.jpg"
-                  alt="benefits"
-                />
-                <img
-                  className="benefits-tabs__content-img benefits-tabs__content-img--active1"
-                  src="images/benefits/4-4-4-active1.jpg"
-                  alt="benefits"
-                />
-                <div className="benefits-tabs__content-box">
-                  <h6 className="benefits-tabs__content-title">Диагностика</h6>
-                  <p className="benefits-tabs__content-text benefits-tabs__content-text--fix">
-                    При обращении к нам, вам не придётся платить за выезд сотрудника и диагностику
-                    вашей техники. Поскольку данные услуги мы предоставляем совершенно бесплатно.
-                  </p>
-                </div>
-              </div>
-            </div>
+            {matches
+              ? content.map((obj, i) => (
+                  <BenefitsContent content={obj} index={activeIndex} id={i} />
+                ))
+              : content768.map((obj, i) => (
+                  <BenefitsContent content={obj} index={activeIndex} id={i} />
+                ))}
           </div>
         </div>
       </section>
-
       <section className="reviews">
         <div className="container">
           <h2 className="reviews__title">Отзывы</h2>
@@ -240,14 +174,6 @@ const Main = () => {
               <img className="reviews__item-img" src="images/reviews/3.jpg" alt="reviews img" />
               <h5 className="reviews__item-title reviews__item-title--fix">Роман</h5>
               <p className="reviews__item-text">Замена блока питания у ноутбука</p>
-            </a>
-            <a
-              className="reviews__item reviews__item-fix"
-              href="https://www.youtube.com/watch?v=-367GUKRj4o&ab_channel=MATRIXPARADISE"
-              target="_blank">
-              <img className="reviews__item-img" src="images/reviews/2.jpg" alt="reviews img" />
-              <h5 className="reviews__item-title">Валентина</h5>
-              <p className="reviews__item-text">Переустановка «Windows»</p>
             </a>
 
             <a
@@ -307,7 +233,7 @@ const Main = () => {
                   id="Направление"
                   width="10"
                   height="16"
-                  // xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABFUlEQVQokXWSv0oEQQyHv7tbBLuFAwVLW5tBsF9EFBTBUkUwgiD4Cjbb6BtYnUWK808rB4K+ghZTaClsZWd9IspKMAfr7hoYyPzmy0wySSfPc/4zETkHjoHvpI0RkT5wCay5dN9tgeaAhwo0BDaTGrQC3AB9l85U9cScpALtAApMASVwpKqDyXnXIYu6cmgMrFchs05RFCYc+v4Z2FbVl3ruBpbu3zr00fYT1apLX61m4IUfbAGPIrLQBvbSNB2FEL6AZWAWOAghPMUYXxtPq+opsAt8AtPAnYhMCvybo6peAxvAu+sDEbELfquuD4W3cAQsumQt3G/0WlXfgFUbBJf2LLCXZVmjwhjjOMY4DCHMAEvA/A8UQFVF2c7rdwAAAABJRU5ErkJggg=="
+                  xlinkHref="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABFUlEQVQokXWSv0oEQQyHv7tbBLuFAwVLW5tBsF9EFBTBUkUwgiD4Cjbb6BtYnUWK808rB4K+ghZTaClsZWd9IspKMAfr7hoYyPzmy0wySSfPc/4zETkHjoHvpI0RkT5wCay5dN9tgeaAhwo0BDaTGrQC3AB9l85U9cScpALtAApMASVwpKqDyXnXIYu6cmgMrFchs05RFCYc+v4Z2FbVl3ruBpbu3zr00fYT1apLX61m4IUfbAGPIrLQBvbSNB2FEL6AZWAWOAghPMUYXxtPq+opsAt8AtPAnYhMCvybo6peAxvAu+sDEbELfquuD4W3cAQsumQt3G/0WlXfgFUbBJf2LLCXZVmjwhjjOMY4DCHMAEvA/A8UQFVF2c7rdwAAAABJRU5ErkJggg=="
                 />
               </svg>
             </a>
@@ -334,7 +260,7 @@ const Main = () => {
                   id="Направление"
                   width="10"
                   height="16"
-                  // xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABEElEQVQokY2SvUpDQRCFP41YXxAExTcQYRpL5WIjKIKtaDFFtPERYusrCKLFCKKliqTQVxDCNumC3MrOWhDhyoQJ3B8DHthiz37MGWZ2piiKH6ADXJjZKVPkYB/YiecX4NDMPpv4LLAH3MZ9G3hV1eUm2MmyrEwpPYjIPLABLAEqIoOU0nu14lhm1gNOgBJYAPqqetACA76Kfr8AT7hT1d44Os/zWi8ppZGIPAKbwCKwJSIrtYqVykNgHXgKq/snGCrjtHucSFVXgTdgP6zrFqiqPkuH1sI6M7PjuQbUBS4j6dstM7uvRavqOeDjcc9XuDuBXL5rf7gBjsIb+FrN7KOa5tHP//kUDnrzrunfDPgFQL1X0AtPExoAAAAASUVORK5CYII="
+                  xlinkHref="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABEElEQVQokY2SvUpDQRCFP41YXxAExTcQYRpL5WIjKIKtaDFFtPERYusrCKLFCKKliqTQVxDCNumC3MrOWhDhyoQJ3B8DHthiz37MGWZ2piiKH6ADXJjZKVPkYB/YiecX4NDMPpv4LLAH3MZ9G3hV1eUm2MmyrEwpPYjIPLABLAEqIoOU0nu14lhm1gNOgBJYAPqqetACA76Kfr8AT7hT1d44Os/zWi8ppZGIPAKbwCKwJSIrtYqVykNgHXgKq/snGCrjtHucSFVXgTdgP6zrFqiqPkuH1sI6M7PjuQbUBS4j6dstM7uvRavqOeDjcc9XuDuBXL5rf7gBjsIb+FrN7KOa5tHP//kUDnrzrunfDPgFQL1X0AtPExoAAAAASUVORK5CYII="
                 />
               </svg>
             </a>
@@ -427,7 +353,7 @@ const Main = () => {
                   id="Направление"
                   width="10"
                   height="16"
-                  // xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABFUlEQVQokXWSv0oEQQyHv7tbBLuFAwVLW5tBsF9EFBTBUkUwgiD4Cjbb6BtYnUWK808rB4K+ghZTaClsZWd9IspKMAfr7hoYyPzmy0wySSfPc/4zETkHjoHvpI0RkT5wCay5dN9tgeaAhwo0BDaTGrQC3AB9l85U9cScpALtAApMASVwpKqDyXnXIYu6cmgMrFchs05RFCYc+v4Z2FbVl3ruBpbu3zr00fYT1apLX61m4IUfbAGPIrLQBvbSNB2FEL6AZWAWOAghPMUYXxtPq+opsAt8AtPAnYhMCvybo6peAxvAu+sDEbELfquuD4W3cAQsumQt3G/0WlXfgFUbBJf2LLCXZVmjwhjjOMY4DCHMAEvA/A8UQFVF2c7rdwAAAABJRU5ErkJggg=="
+                  xlinkHref="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABFUlEQVQokXWSv0oEQQyHv7tbBLuFAwVLW5tBsF9EFBTBUkUwgiD4Cjbb6BtYnUWK808rB4K+ghZTaClsZWd9IspKMAfr7hoYyPzmy0wySSfPc/4zETkHjoHvpI0RkT5wCay5dN9tgeaAhwo0BDaTGrQC3AB9l85U9cScpALtAApMASVwpKqDyXnXIYu6cmgMrFchs05RFCYc+v4Z2FbVl3ruBpbu3zr00fYT1apLX61m4IUfbAGPIrLQBvbSNB2FEL6AZWAWOAghPMUYXxtPq+opsAt8AtPAnYhMCvybo6peAxvAu+sDEbELfquuD4W3cAQsumQt3G/0WlXfgFUbBJf2LLCXZVmjwhjjOMY4DCHMAEvA/A8UQFVF2c7rdwAAAABJRU5ErkJggg=="
                 />
               </svg>
             </a>
@@ -454,7 +380,7 @@ const Main = () => {
                   id="Направление"
                   width="10"
                   height="16"
-                  // xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABEElEQVQokY2SvUpDQRCFP41YXxAExTcQYRpL5WIjKIKtaDFFtPERYusrCKLFCKKliqTQVxDCNumC3MrOWhDhyoQJ3B8DHthiz37MGWZ2piiKH6ADXJjZKVPkYB/YiecX4NDMPpv4LLAH3MZ9G3hV1eUm2MmyrEwpPYjIPLABLAEqIoOU0nu14lhm1gNOgBJYAPqqetACA76Kfr8AT7hT1d44Os/zWi8ppZGIPAKbwCKwJSIrtYqVykNgHXgKq/snGCrjtHucSFVXgTdgP6zrFqiqPkuH1sI6M7PjuQbUBS4j6dstM7uvRavqOeDjcc9XuDuBXL5rf7gBjsIb+FrN7KOa5tHP//kUDnrzrunfDPgFQL1X0AtPExoAAAAASUVORK5CYII="
+                  xlinkHref="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAABEElEQVQokY2SvUpDQRCFP41YXxAExTcQYRpL5WIjKIKtaDFFtPERYusrCKLFCKKliqTQVxDCNumC3MrOWhDhyoQJ3B8DHthiz37MGWZ2piiKH6ADXJjZKVPkYB/YiecX4NDMPpv4LLAH3MZ9G3hV1eUm2MmyrEwpPYjIPLABLAEqIoOU0nu14lhm1gNOgBJYAPqqetACA76Kfr8AT7hT1d44Os/zWi8ppZGIPAKbwCKwJSIrtYqVykNgHXgKq/snGCrjtHucSFVXgTdgP6zrFqiqPkuH1sI6M7PjuQbUBS4j6dstM7uvRavqOeDjcc9XuDuBXL5rf7gBjsIb+FrN7KOa5tHP//kUDnrzrunfDPgFQL1X0AtPExoAAAAASUVORK5CYII="
                 />
               </svg>
             </a>
@@ -472,7 +398,6 @@ const Main = () => {
           </button>
         </div>
       </section>
-
       <section className="problems">
         <div className="container">
           <h4 className="problems__title">Возникшая проблема</h4>
@@ -549,7 +474,9 @@ const Main = () => {
               </form>
               <p className="contacts-content__feedback-text">
                 Нажимая на кнопку «Отправить», вы даёте согласие на{' '}
-                <a href="#">обработку персональных данных</a>
+                <Link className="personal-data" to="/politics">
+                  обработку персональных данных
+                </Link>
               </p>
             </div>
           </div>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 0,
+    "imageUrl": "images/benefits/1.jpg",
+    "title": "Гарантия"
+  },
+  {
+    "id": 1,
+    "imageUrl": "images/benefits/2.jpg",
+    "title": "Время"
+  },
+  {
+    "id": 2,
+    "imageUrl": "images/benefits/3.jpg",
+    "title": "Стаж"
+  },
+  {
+    "id": 3,
+    "imageUrl": "images/benefits/4.jpg",
+    "title": "Диагностика"
+  }
+]

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -12,9 +13,9 @@ const Footer = () => {
             </p>
           </div>
           <div className="footer-content__right">
-            <a className="footer-content__right-btn" href="#">
+            <Link className="footer-content__right-btn" to="/call">
               Вызвать мастера
-            </a>
+            </Link>
             <a className="footer-content__right-phone" href="tel:+79530069757">
               + 7 953 006-97-57
             </a>

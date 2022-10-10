@@ -103,19 +103,10 @@
     &__content {
       width: 1040px;
     }
-    &__content-item {
+    &__content-item--active {
       width: 1040px;
     }
-    &__top-box--one {
-      width: 260px;
-    }
-    &__top-box--two {
-      width: 260px;
-    }
-    &__top-box--three {
-      width: 260px;
-    }
-    &__top-box--four {
+    &__top-box {
       width: 260px;
     }
   }
@@ -355,19 +346,10 @@
     &__content {
       width: 960px;
     }
-    &__content-item {
+    &__content-item--active {
       width: 960px;
     }
-    &__top-box--one {
-      width: 240px;
-    }
-    &__top-box--two {
-      width: 240px;
-    }
-    &__top-box--three {
-      width: 240px;
-    }
-    &__top-box--four {
+    &__top-box {
       width: 240px;
     }
   }
@@ -427,7 +409,7 @@
     &__content {
       width: 860px;
     }
-    &__content-item {
+    &__content-item--active {
       width: 860px;
     }
     &__content-title {
@@ -440,16 +422,7 @@
     &__content-text--fix {
       width: 600px;
     }
-    &__top-box--one {
-      width: 215px;
-    }
-    &__top-box--two {
-      width: 215px;
-    }
-    &__top-box--three {
-      width: 215px;
-    }
-    &__top-box--four {
+    &__top-box {
       width: 215px;
     }
   }
@@ -604,7 +577,7 @@
     &__content {
       width: 760px;
     }
-    &__content-item {
+    &__content-item--active {
       width: 760px;
     }
     &__content-title {
@@ -617,16 +590,7 @@
     &__content-text--fix {
       width: 500px;
     }
-    &__top-box--one {
-      width: 190px;
-    }
-    &__top-box--two {
-      width: 190px;
-    }
-    &__top-box--three {
-      width: 190px;
-    }
-    &__top-box--four {
+    &__top-box {
       width: 190px;
     }
   }
@@ -707,7 +671,7 @@
     &__content {
       width: 720px;
     }
-    &__content-item {
+    &__content-item--active {
       width: 720px;
     }
     &__content-title {
@@ -720,16 +684,7 @@
     &__content-text--fix {
       width: 500px;
     }
-    &__top-box--one {
-      width: 180px;
-    }
-    &__top-box--two {
-      width: 180px;
-    }
-    &__top-box--three {
-      width: 180px;
-    }
-    &__top-box--four {
+    &__top-box{
       width: 180px;
     }
   }
@@ -921,7 +876,7 @@
       width: 620px;
       margin: 0 auto;
     }
-    &__content-item {
+    &__content-item--active {
       width: 620px;
       height: 200px;
     }
@@ -938,75 +893,9 @@
     &__content-text--fix {
       width: 335px;
     }
-    &__top-box--one {
-      display: none;
-    }
-    &__top-box--two {
-      display: none;
-    }
-    &__top-box--three {
-      display: none;
-    }
-    &__top-box--four {
-      display: none;
-    }
-    &__top-box--one1 {
-      background-image: url("../images/benefits/1-active1.jpg");
-      background-repeat: no-repeat;
-      background-position: center center;
+    &__top-box {
       height: 55px;
       width: 155px;
-      display: block;
-    }
-    &__top-box--two1 {
-      background-image: url("../images/benefits/2-active1.jpg");
-      background-repeat: no-repeat;
-      background-position: center center;
-      width: 155px;
-      height: 55px;
-      display: block;
-    }
-    &__top-box--three1 {
-      background-image: url("../images/benefits/3-active1.jpg");
-      background-repeat: no-repeat;
-      background-position: center center;
-      width: 155px;
-      height: 55px;
-      display: block;
-    }
-    &__top-box--four1 {
-      background-image: url("../images/benefits/4-active1.jpg");
-      background-repeat: no-repeat;
-      background-position: center center;
-      width: 155px;
-      height: 55px;
-      display: block;
-    }
-    &__top-box--one1--active {
-    background-image: url("../images/benefits/1-1-active1.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    }
-    &__top-box--two1--active {
-      background-image: url("../images/benefits/2-2-active1.jpg");
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
-    &__top-box--three1--active {
-      background-image: url("../images/benefits/3-3-active1.jpg");
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
-    &__top-box--four1--active {
-      background-image: url("../images/benefits/4-4-active1.jpg");
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
-    &__content-img{
-      display: none;
-    }
-    &__content-img--active1{
-      display: block;
     }
   }
   .reviews{

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -6,10 +7,10 @@ const Header = () => {
       <div className="container">
         <div className="header-content">
           <div className="header-content__left">
-            <a className="logo" href="#">
+            <Link className="logo" to="/">
               <img className="logo__img" src="images/logo.jpg" alt="logo" />
               <img className="logo__img logo__img--active" src="images/logo2.jpg" alt="logo" />
-            </a>
+            </Link>
             <div className="header-content__left-box">
               <p className="header-content__left-text">
                 Ремонт компьютеров в Екатеринбурге
@@ -25,9 +26,9 @@ const Header = () => {
               <a className="header-content__right-phone" href="tel:+79530069757">
                 + 7 953 006-97-57
               </a>
-              <a className="header-content__right-btn" href="#">
+              <Link className="header-content__right-btn" to="/call">
                 Вызвать мастера
-              </a>
+              </Link>
             </div>
             <nav className="menu">
               <button className="menu__btn">
